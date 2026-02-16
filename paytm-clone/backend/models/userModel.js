@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const dotenv = rrquire("dotenv");
+const dotenv = require("dotenv");
 dotenv.config();
 mongoose
   .connect(process.env.MONGO_URL)
@@ -8,9 +8,9 @@ mongoose
 
 const userSchema = new mongoose.Schema({
   username: String,
-  password: string,
-  firstname: string,
-  lastname: string,
+  password: String,
+  firstname: String,
+  lastname: String,
 });
 
 const accountSchema = new mongoose.Schema({
