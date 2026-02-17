@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const zod = require("zod");
 const { User, Account } = require("../models/userModel");
-const { JWT_SECRET } = require("../config");
+const JWT_SECRET  = require("../config");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const {authMiddleware} = require("../middleware")
@@ -38,14 +38,15 @@ const signupSchema = zod.object({
   username: zod.string(),
   password: zod.string(),
   firstname: zod.string(),
+  lastname: zod.string(),
 });
 
 router.post("/signup", async (req, res) => {
   const body = req.body;
   const { success } = signupSchema.safeParse(req.body);
   if (!success) {
-    return res.json({
-      message: "Email alraedy taken / Incorrect inputs",
+    return res.status(401).json({
+      message: "invalid inputs",
     });
   }
   const Existinguser = await User.findOne({
@@ -53,8 +54,8 @@ router.post("/signup", async (req, res) => {
   });
 
   if (Existinguser) {
-    return res.json({
-      message: "Email already taken / Incorrect inputs",
+    return res.status(409).json({
+      message: "Email already taken",
     });
   }
 
