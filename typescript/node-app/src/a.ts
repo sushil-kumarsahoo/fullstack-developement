@@ -210,3 +210,52 @@
 // console.log(Direction.Down);
 // console.log(Direction.Up);
 
+//-------------------------------------------------------
+//Generics
+
+
+//issue
+// type Input = number | string;
+
+// function firstEl(arr: Input[]){
+//     return arr[0];
+// }
+
+// const value2 = firstEl([1,2,3,"sushil"]);
+
+// const value = firstEl(["sushil","sahoo"]);
+// console.log(value.toUpperCase());
+
+
+//issue resolve by generic
+// function firstElement<T>(arr: T[]){
+//     return arr[0];
+// }
+
+// interface User {
+//     name:string
+// }
+// const el = firstElement(["SUSHIL", "sRGYGhoo"]);
+// const el2 = firstElement([1,2]);
+// const el3 = firstElement<User>([{name:"sushil"}]);
+
+// console.log(el?.toLowerCase());
+
+
+
+//issue
+
+// function identity2(arg: string|number){
+//     return arg;
+// }
+// let outpu1 = identity("mystring");
+// let outpu2 = identity(100);
+
+//issue resolved with generic
+
+// function identity<T>(arg: T){
+//     return arg;
+// }
+// let output1 = identity<string>("mystring");
+// let output2 = identity<number>(100);
+
