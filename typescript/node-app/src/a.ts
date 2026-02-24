@@ -228,6 +228,7 @@
 
 
 //issue resolve by generic
+
 // function firstElement<T>(arr: T[]){
 //     return arr[0];
 // }
@@ -258,4 +259,3 @@
 // }
 // let output1 = identity<string>("mystring");
 // let output2 = identity<number>(100);
-
