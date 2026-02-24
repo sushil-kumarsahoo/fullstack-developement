@@ -149,18 +149,65 @@
 
 //-----------------------------------------------------------
 
-function maxValue(arr: number[]) {
-    if (arr.length === 0) return undefined;
+// function maxValue(arr: number[]) {
+//     if (arr.length === 0) return undefined;
 
-    let max = arr[0]!;
+//     let max = arr[0]!;
 
-    for (const value of arr) {
-        if (value > max) {
-            max = value;
-        }
-    }
+//     for (const value of arr) {
+//         if (value > max) {
+//             max = value;
+//         }
+//     }
 
-    return max;
+//     return max;
+// }
+
+// console.log(maxValue([1,2,3]));
+
+//-----------------------------------------------------------
+
+//Array type
+
+// interface User {
+//     firstName: string;
+//     lastName: string;
+//     age: number;
+// }
+
+// function filteredUsers(users:User[]){
+//     return users.filter(x => x.age >= 18);
+// }
+
+// console.log(filteredUsers([{
+//     firstName:"sushil",
+//     lastName:"sahoo",
+//     age:20
+// },
+// {
+//     firstName:"soumya",
+//     lastName:"pradhan",
+//     age:17
+// }]));
+
+
+//-------------------------------------------------------
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right
 }
 
-console.log(maxValue([1,2,3]));
+function doSomething(keyPressed: Direction){
+    if(keyPressed == Direction.Up){
+
+    }
+     
+}
+
+doSomething(Direction.Up);
+console.log(Direction.Down);
+console.log(Direction.Up);
+
