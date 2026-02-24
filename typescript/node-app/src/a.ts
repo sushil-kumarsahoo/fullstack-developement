@@ -78,22 +78,89 @@
 
 //---------------------------------------------------------
 
- interface Person{
-    name:string;
-    age:number;
-    greet(phrase: string): void;
- }
+//  interface Person{
+//     name:string;
+//     age:number;
+//     greet(phrase: string): void;
+//  }
 
- class Employee implements Person{
-    name:string;
-    age:number;
+//  class Employee implements Person{
+//     name:string;
+//     age:number;
 
-    constructor(n:string, a:number){
-        this.name = n;
-        this.age = a;
-    }
-    greet(phrase:string){
-        console.log(`$(phrase) ${this.name}`);
+//     constructor(n:string, a:number){
+//         this.name = n;
+//         this.age = a;
+//     }
+//     greet(phrase:string){
+//         console.log(`${phrase} ${this.name}`);
         
+//     }
+//  }
+
+//  const e = new Employee("sushil", 20);
+//  console.log(e.name);
+ 
+
+//-----------------------------------------------------------
+
+// type User = {
+//     firstName : string;
+//     lastName : string;
+//     age:number;
+// } 
+
+// type StringorNumber = string | number;
+
+// function printId(id: StringorNumber){
+//     console.log(`ID: ${id}`);
+// }
+
+// printId(10);
+// printId("10");
+
+//-----------------------------------------------------------
+
+// type Employee = {
+//     name: string;
+//     startDate: Date;
+// };
+
+// interface Manager{
+//     name:string;
+//     department:string;
+// };
+
+// type TechLead = Employee & Manager;
+
+// const t: TechLead = {
+//     name: "sushil",
+//     startDate: new Date(),
+//     department:"asadda"
+// }
+
+// function printDetails(lead: TechLead) {
+//      console.log("Name:", lead.name); 
+//      console.log("Department:", lead.department); 
+//      console.log("Start Date:", lead.startDate); 
+//     }
+//     printDetails(t);
+
+
+//-----------------------------------------------------------
+
+function maxValue(arr: number[]) {
+    if (arr.length === 0) return undefined;
+
+    let max = arr[0]!;
+
+    for (const value of arr) {
+        if (value > max) {
+            max = value;
+        }
     }
- }
+
+    return max;
+}
+
+console.log(maxValue([1,2,3]));
