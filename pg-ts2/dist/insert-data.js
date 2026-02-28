@@ -37,7 +37,7 @@ async function getUsers() {
 connectToDatabase()
     .then(async () => {
     await createUserTable();
-    await insertUser("anshu2", "anshu", "anshu2@gmail.com", "12345");
+    await insertUser("sushil", "sahoo", "sushil@gmail.com", "12345");
     // await deleteUser("anshu2@gmail.com");
     // await getUsers();
 })
