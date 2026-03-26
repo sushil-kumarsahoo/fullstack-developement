@@ -19,6 +19,7 @@ app.post('/api/v1/signup', async(c) => {
   }).$extends(withAccelerate())
 
   const body = await c.req.json()
+  try {
  const user = await prisma.user.create({
     data:{
       email:body.email,
@@ -29,6 +30,10 @@ app.post('/api/v1/signup', async(c) => {
   return c.json({
     jwt:token
   })
+} catch(e){
+  c.status(403);
+  return c.json({error: "error while signing up"})
+}
 })
 
 app.post('/api/v1/signin', async(c) => {
