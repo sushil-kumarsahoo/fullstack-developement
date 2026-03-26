@@ -13,48 +13,49 @@ type Bindings = {
 const app = new Hono<{ Bindings: Bindings }>()
 
 
-app.post('/api/v1/signup', async(c) => {
+app.post('/api/v1/signup', async (c) => {
   const prisma = new PrismaClient({
     accelerateUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate())
 
   const body = await c.req.json()
   try {
- const user = await prisma.user.create({
-    data:{
-      email:body.email,
-      password:body.password,
-    },
-  })
-  const token = await sign({ id: user.id},c.env.JWT_SECRET )
-  return c.json({
-    jwt:token
-  })
-} catch(e){
-  c.status(403);
-  return c.json({error: "error while signing up"})
-}
+    const user = await prisma.user.create({
+      data: {
+        email: body.email,
+        password: body.password,
+      },
+    })
+    const token = await sign({ id: user.id }, c.env.JWT_SECRET)
+    return c.json({
+      jwt: token
+    })
+  } catch (e) {
+    c.status(403);
+    return c.json({ error: "error while signing up" })
+  }
 })
 
-app.post('/api/v1/signin', async(c) => {
-   const prisma = new PrismaClient({
-    accelerateUrl:c.env?.DATABASE_URL
-   }).$extends(withAccelerate());
+app.post('/api/v1/signin', async (c) => {
+  const prisma = new PrismaClient({
+    accelerateUrl: c.env?.DATABASE_URL
+  }).$extends(withAccelerate());
 
-   const body = await c.req.json();
-   const user = await prisma.user.findUnique({
-    where:{
-      email: body.email
+  const body = await c.req.json();
+  const user = await prisma.user.findUnique({
+    where: {
+      email: body.email,
+      password:body.password
     }
-   });
+  });
 
-   if(!user){
+  if (!user) {
     c.status(403);
-    return c.json({error: "user not found"});
-   }
+    return c.json({ error: "user not found" });
+  }
 
-   const jwt = await sign({id:user.id}, c.env.JWT_SECRET);
-  return c.json({jwt})
+  const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
+  return c.json({ jwt })
 })
 
 app.post('/api/v1/blog', (c) => {
