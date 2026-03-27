@@ -1,13 +1,28 @@
 import type { signupInput } from "@sushill7847/medium-common";
 import { useState, type ChangeEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {BACKEND_URL} from '../config' 
+import axios from "axios";
 
 function Auth({ type }: { type: "signup" | "signin" }) {
+    const navigate = useNavigate();
   const [postinputs, setPostInputs] = useState<signupInput>({
     name: "",
     email: "",
     password: "",
   });
+
+ async function sendRequest(){
+    try{
+      const response = await  axios.post(`${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postinputs)
+
+      const {jwt} = response.data;
+      localStorage.setItem("token",jwt);
+      navigate("/blog")
+  } catch(e){
+    alert("Somwthing went wrong, Please try again");
+  }
+}
 
   return (
     <div className="h-screen flex justify-center flex-col">
@@ -23,7 +38,7 @@ function Auth({ type }: { type: "signup" | "signin" }) {
             </div>
           </div>
           <div className="pt-10">
-            <LabledInput
+           { type == "signup" ? <LabledInput
               label="Name"
               placeholder="sushil kumar..."
               onChange={(e) => {
@@ -32,7 +47,7 @@ function Auth({ type }: { type: "signup" | "signin" }) {
                   name: e.target.value,
                 }));
               }}
-            />
+            /> : null}
             <LabledInput
               label="Email"
               placeholder="sushil@gmail.com"
@@ -54,7 +69,7 @@ function Auth({ type }: { type: "signup" | "signin" }) {
                 }));
               }}
             />
-            <button type="button" className="w-full mt-8 rounded-sm text-body bg-gray-800 border border-default hover:bg-neutral-secondary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none text-white">{type === "signup" ? "sign up" : "sign in"}</button>
+            <button onClick={sendRequest} type="button" className="w-full mt-8 rounded-sm text-body bg-gray-800 border border-default hover:bg-neutral-secondary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none text-white">{type === "signup" ? "sign up" : "sign in"}</button>
 
           </div>
           
