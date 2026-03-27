@@ -2,6 +2,8 @@ import { PrismaClient } from '../generated/prisma/client'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { Hono } from 'hono'
 import { decode, sign, verify } from 'hono/jwt'
+import { signupInput,signinInput } from '@sushill7847/medium-common'
+
 
 type Bindings = {
     DATABASE_URL: string,
@@ -16,37 +18,20 @@ type JwtPayload = {
 
 export const userRouter = new Hono<{ Bindings: Bindings, Variables: Variables }>();
 
-userRouter.use('/api/v1/blog/*', async (c, next) => {
-    const auth = c.req.header('Authorization') || "";
-
-    if (!auth || !auth.startsWith('Bearer ')) {
-        return c.json({ message: 'Forbidden' }, 403)
-    }
-
-    const token = auth.split(" ")[1]
-    try {
-        const payload = await verify(token, c.env.JWT_SECRET, 'HS256') as JwtPayload
-        if (payload.id) {
-            c.set('userId', payload.id)
-            await next()
-        }
-        else {
-            c.status(403)
-            return c.json({ error: "unauthorized" }, 403)
-        }
-    }
-    catch (e) {
-        return c.json({ error: 'Invalid or expired token' }, 403)
-    }
-})
-
 
 userRouter.post('/signup', async (c) => {
+    const body = await c.req.json();
+    const success = signupInput.safeParse(body);
+    if(!success){
+        c.status(411)
+        return c.json({
+            message: "invalid input"
+        })
+    }
     const prisma = new PrismaClient({
         accelerateUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
 
-    const body = await c.req.json()
     try {
         const user = await prisma.user.create({
             data: {
@@ -66,11 +51,20 @@ userRouter.post('/signup', async (c) => {
 })
 
 userRouter.post('/signin', async (c) => {
+    const body = await c.req.json();
+    const success = signinInput.safeParse(body);
+
+    if(!success){
+        c.status(403)
+        return c.json({
+            message:"invalid input"
+        })
+    }
     const prisma = new PrismaClient({
         accelerateUrl: c.env?.DATABASE_URL
     }).$extends(withAccelerate());
 
-    const body = await c.req.json();
+    
     try {
         const user = await prisma.user.findUnique({
             where: {
