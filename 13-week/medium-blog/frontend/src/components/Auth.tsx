@@ -17,8 +17,9 @@ function Auth({ type }: { type: "signup" | "signin" }) {
       const response = await  axios.post(`${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postinputs)
 
       const {jwt} = response.data;
-      localStorage.setItem("token",jwt);
-      navigate("/blog")
+      localStorage.setItem("token",`Bearer ${jwt}`);
+      //  axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
+      navigate("/blogs")
   } catch(e){
     alert("Somwthing went wrong, Please try again");
   }
