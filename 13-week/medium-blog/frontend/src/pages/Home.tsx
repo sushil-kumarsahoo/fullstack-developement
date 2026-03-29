@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
       <h1 className="text-3xl font-semibold mb-6 text-black text-center">Join Our Community for Free</h1>
-      <div className="flex flex-col lg:flex-row items-center justify-between w-full max-w-screen-md">
+      <div className="flex flex-col lg:flex-row items-center justify-between w-full max-w-3xl">
         <Link to="/signup" className="w-full lg:w-1/2 mb-4 lg:mb-0">
           <button type="button" className="w-full bg-white text-sm text-gray-600 p-3 rounded-md shadow-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300">
             Sign Up
