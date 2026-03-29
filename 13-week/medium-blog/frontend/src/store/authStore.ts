@@ -2,12 +2,14 @@ import { create } from "zustand";
 
 interface AuthStore{
     token: string | null;
+    isLoggedOut:boolean;
     setToken : (token : string) => void;
     logout: () => void;
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
     token: localStorage.getItem("token"),
+    isLoggedOut:false,
 
 
     setToken: (token) => {
@@ -17,6 +19,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
     logout: () => {
         localStorage.removeItem("token");
-        set({token : null});
+        set({token : null,isLoggedOut:true});
     },
 }))

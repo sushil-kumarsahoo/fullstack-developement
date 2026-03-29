@@ -1,36 +1,36 @@
 import type { signupInput } from "@sushill7847/medium-common";
 import { useState, type ChangeEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {BACKEND_URL} from '../config' 
+import { BACKEND_URL } from "../config";
 import axios from "axios";
 import { useAuthStore } from "../store/authStore";
 
-
-
 function Auth({ type }: { type: "signup" | "signin" }) {
-  
-    const {setToken} = useAuthStore();
+  const { setToken } = useAuthStore();
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [postinputs, setPostInputs] = useState<signupInput>({
     name: "",
     email: "",
     password: "",
   });
 
- async function sendRequest(){
-    try{
-      const response = await  axios.post(`${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postinputs)
+  async function sendRequest() {
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
+        postinputs,
+      );
 
-      const {jwt} = response.data;
+      const { jwt } = response.data;
       //localStorage.setItem("token",`Bearer ${jwt}`);
-     setToken(`Bearer ${jwt}`);
+      setToken(`Bearer ${jwt}`);
 
-      navigate("/blogs")
-  } catch(e){
-    alert("Somwthing went wrong, Please try again");
+      navigate("/blogs");
+    } catch (e) {
+      alert("Somwthing went wrong, Please try again");
+    }
   }
-}
 
   return (
     <div className="h-screen flex justify-center flex-col">
@@ -39,23 +39,30 @@ function Auth({ type }: { type: "signup" | "signin" }) {
           <div className="px-10 ">
             <div className="text-4xl font-bold">Create an account</div>
             <div className="text-slate-400 text-center">
-                {type === "signin" ? "Dont have an account" : "Already have an account"}
-              <Link className="pl-2 underline " to={ type == "signin"?"/signup":"/signin"}>
-                {type === 'signin'?"Sign up":"Sign in"}
+              {type === "signin"
+                ? "Dont have an account"
+                : "Already have an account"}
+              <Link
+                className="pl-2 underline "
+                to={type == "signin" ? "/signup" : "/signin"}
+              >
+                {type === "signin" ? "Sign up" : "Sign in"}
               </Link>
             </div>
           </div>
           <div className="pt-10">
-           { type == "signup" ? <LabledInput
-              label="Name"
-              placeholder="sushil kumar..."
-              onChange={(e) => {
-                setPostInputs((c) => ({
-                  ...c,
-                  name: e.target.value,
-                }));
-              }}
-            /> : null}
+            {type == "signup" ? (
+              <LabledInput
+                label="Name"
+                placeholder="sushil kumar..."
+                onChange={(e) => {
+                  setPostInputs((c) => ({
+                    ...c,
+                    name: e.target.value,
+                  }));
+                }}
+              />
+            ) : null}
             <LabledInput
               label="Email"
               placeholder="sushil@gmail.com"
@@ -77,14 +84,25 @@ function Auth({ type }: { type: "signup" | "signin" }) {
                 }));
               }}
             />
-            <button onClick={sendRequest} type="button" className="w-full mt-8 rounded-sm text-body bg-gray-800 border border-default hover:bg-neutral-secondary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none text-white">{type === "signup" ? "sign up" : "sign in"}</button>
+            <button
+              onClick={sendRequest}
+              type="button"
+              className="w-full mt-8 rounded-sm text-body bg-gray-800 border border-default hover:bg-neutral-secondary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none text-white cursor-pointer"
+            >
+              {type === "signup" ? "sign up" : "sign in"}
+            </button>
 
+            <div className="text-center mt-4">
+              <Link
+                to="/"
+                className="text-sm text-gray-500 hover:text-gray-800 underline"
+              >
+                ← Back to Home
+              </Link>
+            </div>
           </div>
-          
         </div>
-        
       </div>
-      
     </div>
   );
 }

@@ -1,12 +1,15 @@
-import { Navigate } from "react-router-dom";
+import { Navigate,Outlet } from "react-router-dom";
+import { useAuthStore } from "../store/authStore";
 
-const ProtectedRoute = ({children} : {children : React.ReactNode}) => {
-     const token = localStorage.getItem("token");
+const ProtectedRoute = () => {
+     const {token,isLoggedOut} = useAuthStore();
 
      if(!token){
-        return <Navigate to="/signin"/>
+         if (isLoggedOut)  return <Navigate to="/"/>;
+
+         return <Navigate to="/signin"/>
      }
-     return children
+     return <Outlet/>
 }
 
 export default ProtectedRoute
