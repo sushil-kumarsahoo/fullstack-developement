@@ -1,6 +1,6 @@
 "use client"
 import Button from './Button';
-
+//import { useEffect } from 'react';
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -8,6 +8,12 @@ export const SigninPage = function(){
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+   //const [mounted, setMounted] = useState(false); 
+
+//    useEffect(() => {  
+//     setMounted(true);
+//   }, []);
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,7 +41,7 @@ export const SigninPage = function(){
     setPassword('');
   };
 
- 
+  //if (!mounted) return null; 
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-50">

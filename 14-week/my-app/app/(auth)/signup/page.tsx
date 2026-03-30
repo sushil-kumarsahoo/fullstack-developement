@@ -3,13 +3,19 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-
+//import { useEffect } from 'react';
 export default function SignupPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  //const [mounted, setMounted] = useState(false); 
   const [error, setError] = useState('');
+
+  // useEffect(() => {  
+  //     setMounted(true);
+  //   }, []);
+  
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +49,8 @@ export default function SignupPage() {
     setPassword('');
     setConfirmPassword('');
   };
+
+ //if (!mounted) return null; 
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-50">
