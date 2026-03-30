@@ -1,11 +1,10 @@
-
-
-'use client';
+"use client"
+import Button from './Button';
 
 import { useState } from 'react';
 import Link from 'next/link';
 
-export default function SigninPage() {
+export const SigninPage = function(){
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -35,6 +34,8 @@ export default function SigninPage() {
     setEmail('');
     setPassword('');
   };
+
+ 
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-50">
@@ -69,13 +70,8 @@ export default function SigninPage() {
               placeholder="Enter your password"
             />
           </div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition"
-          >
-            Sign In
-          </button>
+             
+         <Button/>
         </form>
 
         <p className="text-center mt-4 text-sm text-gray-600">
