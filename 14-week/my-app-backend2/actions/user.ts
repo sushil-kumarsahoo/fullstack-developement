@@ -9,10 +9,10 @@ export async function signup(email:string, password:string) {
                 password:password
             }
         })
-        return true
+        return "signup"
     }
     catch (e) {
-       return false
+       return "error"
     }
 
 }

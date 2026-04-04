@@ -30,8 +30,10 @@ export default function Signup() {
           <br />
           <div className=" mt-4 flex justify-center">
             <button
-              onClick={() => {
-                signup(email,password)
+              onClick={async() => {
+              const res = await signup(email,password);
+              console.log(res);
+              
               }}
               className="cursor-pointer"
             >
