@@ -1,6 +1,7 @@
 "use client";
+import { signup } from "@/actions/user";
 import { useState } from "react";
-import axios from "axios";
+//import axios from "axios";
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,16 +31,7 @@ export default function Signup() {
           <div className=" mt-4 flex justify-center">
             <button
               onClick={() => {
-                axios.post(
-                  "http://localhost:3000/api/user",
-                  {
-                    email,
-                    password,
-                  },
-                  {
-                    headers: { "Content-Type": "application/json" },
-                  },
-                );
+                signup(email,password)
               }}
               className="cursor-pointer"
             >
