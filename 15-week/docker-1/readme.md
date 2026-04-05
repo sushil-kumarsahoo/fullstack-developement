@@ -72,6 +72,10 @@ Then add to `package.json`:
 ```json
 "start": "cross-env DATABASE_URL=postgresql://user:password@localhost:5432/dbname node dist/index.js"
 ```
+
+### to open a interactive terminal inside container
+```
+ docker exec -it docker_id  /bin/bash 
 ```
 
 If you need a `Dockerfile` or a minimal `index.ts`/`index.js` to test, I can add one.
