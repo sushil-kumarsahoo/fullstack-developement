@@ -32,5 +32,47 @@ docker run -d -p 3000:3000 backend-app
 docker run -p 3000:3000 -e DATABASE_URL="postgresql://postgres:mypassword@host.docker.internal:5432/mydb" backend-app
 ```
 
+
+## Environment Variables
+
+This project requires a `DATABASE_URL` to connect to PostgreSQL.
+
+### Option 1 — `.env` file (recommended for local dev)
+
+Create a `.env` file in the root:
+
+```env
+
+DATABASE_URL="postgresql://user:password@localhost:5432/dbname"
+```
+
+### Option 2 — Terminal inline
+
+**Mac/Linux:**
+```bash
+DATABASE_URL="postgresql://user:password@localhost:5432/dbname" node dist/index.js
+```
+
+**Windows:**
+```powershell
+$env:DATABASE_URL="postgresql://user:password@localhost:5432/dbname"; node dist/index.js
+```
+
+### Option 3 — Docker
+```bash
+docker run -p 3000:3000 -e DATABASE_URL="postgresql://user:password@host.docker.internal:5432/dbname" backend-app
+```
+
+### Option 4 — package.json script
+Install cross-env first:
+```bash
+npm install cross-env
+```
+Then add to `package.json`:
+```json
+"start": "cross-env DATABASE_URL=postgresql://user:password@localhost:5432/dbname node dist/index.js"
+```
+```
+
 If you need a `Dockerfile` or a minimal `index.ts`/`index.js` to test, I can add one.
 
