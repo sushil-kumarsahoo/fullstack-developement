@@ -28,6 +28,8 @@ docker build -t backend-app .
 docker run -p 3000:3000 backend-app
 # Run in background (detached):
 docker run -d -p 3000:3000 backend-app
+# pass env to docker
+docker run -p 3000:3000 -e DATABASE_URL="postgresql://postgres:mypassword@host.docker.internal:5432/mydb" backend-app
 ```
 
 If you need a `Dockerfile` or a minimal `index.ts`/`index.js` to test, I can add one.
