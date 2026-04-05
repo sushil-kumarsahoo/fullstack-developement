@@ -17,3 +17,18 @@ node dist/index.js
 
 Add these to your project README or use them as a quick-start script.
 
+## Docker
+
+Build the image and run the container (PowerShell):
+
+```powershell
+#create docker image
+docker build -t backend-app .
+#run docker container
+docker run -p 3000:3000 backend-app
+# Run in background (detached):
+docker run -d -p 3000:3000 backend-app
+```
+
+If you need a `Dockerfile` or a minimal `index.ts`/`index.js` to test, I can add one.
+
