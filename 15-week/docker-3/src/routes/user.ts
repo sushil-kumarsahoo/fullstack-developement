@@ -1,0 +1,21 @@
+import type {Request, Response } from "express";
+import  express  from "express";
+import User from "../models/User.js";
+
+const router = express.Router();
+
+// GET - get all users
+router.get("/", async (req: Request, res: Response) => {
+  const users = await User.find();
+  res.json(users);
+});
+
+// POST - create a user
+router.post("/", async (req: Request, res: Response) => {
+  const { name, email } = req.body;
+  const user = new User({ name, email });
+  await user.save();
+  res.status(201).json(user);
+});
+
+export default router;
