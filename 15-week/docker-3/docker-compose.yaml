@@ -8,6 +8,7 @@ services:
    volumes:
     - mongodb-data:/data/db
   backend:
+    build: .
     image: backend22
     container_name: backend_application
     ports:
