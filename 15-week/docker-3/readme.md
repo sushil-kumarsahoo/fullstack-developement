@@ -23,7 +23,11 @@ docker run --env-file .env sushilkmrshoo/sushil_docker
 
 ### for pushing to docker hub
 
- docker push sushilkmrshoo/sushil_docker                   
+ docker push sushilkmrshoo/sushil_docker 
+
+ ### to see all images
+
+  docker images                   
 ```
 
 Notes:
