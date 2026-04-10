@@ -36,7 +36,7 @@ app.get("/user", (req, res) => {
 
 
 app.post("/logout", (req, res) => {
-    res.cookie("token", "ads");
+    res.clearCookie("token");
     res.json({
         message: "Logged out!"
     })
