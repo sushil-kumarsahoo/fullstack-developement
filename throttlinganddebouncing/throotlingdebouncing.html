@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <script>
+    let timeout;
+    function debounceDiv() {
+      clearTimeout(timeout);
+      timeout = setTimeout(function () {
+        populateDiv();
+      }, 1000);
+    }
+
+    function populateDiv() {
+      const a = document.getElementById("firstNumber").value;
+      const b = document.getElementById("secondNumber").value;
+      const expression = `${a}+${b}`;
+      fetch(
+        "https://api.mathjs.org/v4/?expr=" + encodeURIComponent(expression)
+      ).then(function (response) {
+        response.text().then(function (ans) {
+          document.getElementById("finalSum").innerHTML = ans;
+        });
+      });
+    }
+  </script>
+
+  <body>
+    <input
+      oninput="debounceDiv()"
+      id="firstNumber"
+      type="text"
+      placeholder="first number"
+    />
+    <input
+      oninput="debounceDiv()"
+      id="secondNumber"
+      type="text"
+      placeholder="second number"
+    />
+    <br />
+    <div id="finalSum"></div>
+  </body>
+</html>
