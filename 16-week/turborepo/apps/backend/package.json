@@ -13,6 +13,7 @@
   "license": "ISC",
  "type": "module",
   "dependencies": {
+    "@repo/common":"*",
     "express": "^5.2.1"
   },
   "devDependencies": {
