@@ -52,3 +52,26 @@ then install prisma
 npm install prisma @prisma/client --save-dev
 
 ```
+
+Run postgres inside a docker container
+
+```
+docker run --name postgres-db -e POSTGRES_USER=myuser1 -e POSTGRES_PASSWORD=mypassword -e POSTGRES_DB=my-db -p 5432:5432 -d postgres
+
+```
+
+to check the table was created or not after migration
+
+```
+docker exec -it docker-id /bin/bash
+
+ psql -U username -d databasename
+
+ \dt;
+
+ ```
+
+ 
+
+
+
