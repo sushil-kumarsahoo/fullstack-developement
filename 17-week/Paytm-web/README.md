@@ -86,7 +86,7 @@ docker exec -it docker-id /bin/bash
   ```
 
  #### Use a Singleton Prisma Client
-
+ 
 Prisma opens database connections. If every file creates a new instance, you may hit too many connections with PostgreSQL.
 
 
