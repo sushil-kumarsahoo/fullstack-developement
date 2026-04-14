@@ -1,3 +1,6 @@
+import {prisma} from "@repo/db"
+
+
 
 export default function Page(){
   return (

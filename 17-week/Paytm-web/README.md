@@ -71,7 +71,38 @@ docker exec -it docker-id /bin/bash
 
  ```
 
- 
+ ### add exports to json of db folder
 
+ ```
+ "exports": {
+    ".": "./src/index.ts"
+  }
+
+  ```
+  ### add this to json of your app 
+
+  ```
+  "@repo/db":"*"
+  ```
+
+ #### Use a Singleton Prisma Client
+
+Prisma opens database connections. If every file creates a new instance, you may hit too many connections with PostgreSQL.
+
+
+```
+const globalForPrisma = globalThis as { prisma?: PrismaClient };
+
+export const prisma =
+  globalForPrisma.prisma ??
+  new PrismaClient({
+    accelerateUrl: undefined as any
+  });
+
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = prisma;
+}
+```
+then export through index.ts file in src folder
 
 
