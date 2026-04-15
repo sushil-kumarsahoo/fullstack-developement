@@ -59,6 +59,14 @@ Run postgres inside a docker container
 docker run --name postgres-db -e POSTGRES_USER=myuser1 -e POSTGRES_PASSWORD=mypassword -e POSTGRES_DB=my-db -p 5432:5432 -d postgres
 
 ```
+migrate the db and generate client
+
+```
+npx prisma migrate dev    # creates migration + generates client
+
+npx prisma generate
+
+```
 
 to check the table was created or not after migration
 
