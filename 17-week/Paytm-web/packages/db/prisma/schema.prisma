@@ -17,3 +17,10 @@ model User {
   email        String     @unique
   name     String?
 }
+
+model Merchant {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  //auth_type AuthType
+}
