@@ -11,12 +11,13 @@
     "check-types": "next typegen && tsc --noEmit"
   },
   "dependencies": {
+    "@repo/db": "*",
     "@repo/ui": "*",
     "@tailwindcss/postcss": "^4.2.2",
     "next": "16.2.0",
+    "next-auth": "^4.24.14",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "@repo/db":"*"
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
