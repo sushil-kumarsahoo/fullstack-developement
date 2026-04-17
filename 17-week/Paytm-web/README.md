@@ -79,6 +79,21 @@ docker exec -it docker-id /bin/bash
 
  ```
 
+ ### Enter into terminal inside docker
+ ```
+ docker exec -it docker-id /bin/bash
+
+ ``` 
+
+ ### to check tables
+ ```
+ psql -U username -d databsename
+
+  \dt
+
+  
+ ```
+
  ### add exports to json of db folder
 
  ```
