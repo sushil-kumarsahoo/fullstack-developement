@@ -32,7 +32,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         // Login flow
-        if (existingUser) {
+        if (existingUser) {          
           const passwordValid = await bcrypt.compare(
             credentials.password,
             existingUser.password
