@@ -128,4 +128,10 @@ if (process.env.NODE_ENV !== "production") {
 ```
 then export through index.ts file in src folder
 
+### to initialize an express app first to initialize package.json and tsconfig.json
+``` 
+npm init -y
 
+npx tsc --init
+
+```
