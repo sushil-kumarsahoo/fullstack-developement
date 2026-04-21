@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { prisma } from "@repo/db";
 import express from "express";
 
@@ -8,7 +9,7 @@ app.post("/hdfcWebhook", async (req, res) => {
     const paymentInformation = {
         token: req.body.token,
         userId: req.body.user_identifier,
-        amount: req.body.amount,
+        amount: Number(req.body.amount),
     };
 
     try {
@@ -23,12 +24,12 @@ app.post("/hdfcWebhook", async (req, res) => {
                     }
                 }
             }),
-            await prisma.onRampTransaction.update({
+             prisma.onRampTransaction.update({
                 where: {
                     token: paymentInformation.token,
                 },
                 data: {
-                    status: "success"
+                    status: "Success"
                 }
             })
         ]);
