@@ -1,3 +1,6 @@
+
+
+
 name: Build Succeeds on PR
 
 on:
@@ -20,6 +23,10 @@ jobs:
 
             - name: Install Dependencies
               run: npm ci
+              working-directory: 17-week/Paytm-web
+
+            - name: Generate Prisma Client
+              run: npx prisma generate --schema=packages/db/prisma/schema.prisma
               working-directory: 17-week/Paytm-web
 
             - name: Run build
