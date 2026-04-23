@@ -18,9 +18,11 @@ jobs:
               with:
                 node-version: '20'
 
-            - name: Install Dependecies
+            - name: Install Dependencies
               run: npm ci
+              working-directory: 17-week/Paytm-web
 
             - name: Run build
-              run: npm run build    
+              run: npm run build 
+              working-directory: 17-week/Paytm-web   
 
