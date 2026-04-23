@@ -135,3 +135,52 @@ npm init -y
 npx tsc --init
 
 ```
+
+## Git workflow
+
+Follow these steps to create a feature branch, push it, open a PR, and clean up afterwards:
+
+1. Start from latest `main`
+```bash
+git checkout main
+git pull origin main
+```
+
+2. Create a new branch (example `add-payment`)
+```bash
+git checkout -b add-payment
+```
+
+3. Make changes and commit
+```bash
+git add .
+git commit -m "your message"
+```
+
+4. Push branch to GitHub
+```bash
+git push origin add-payment
+```
+
+5. Create a Pull Request on GitHub and merge it there.
+
+6. Update local `main` after merge
+```bash
+git checkout main
+git pull origin main
+```
+
+7. Delete the feature branch (cleanup)
+
+- Local delete:
+```bash
+git branch -d add-payment
+```
+- Remote delete:
+```bash
+git push origin --delete add-payment
+```
+
+Full flow: `main` → create branch → work → push → PR → merge → pull → delete branch
+
+
