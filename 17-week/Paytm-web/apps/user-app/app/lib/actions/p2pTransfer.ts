@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import {authOptions}  from "../auth";
 import {prisma} from "@repo/db"
 
+
 export async function p2pTransfer(to: string, amount : number){
      const session = await getServerSession(authOptions);
      const from = session?.user?.id;
@@ -54,4 +55,22 @@ export async function p2pTransfer(to: string, amount : number){
             }
         })
      });
+}
+
+
+export async function getP2PTransfers() {
+    const session = await getServerSession(authOptions);
+    const userId = Number(session?.user?.id);
+
+    const transfers = await prisma.p2pTransfer.findMany({
+        where:{fromUserId:userId},
+        include: {toUser:true},
+        orderBy:{timestamp:"desc"}
+    });
+
+    return transfers.map(t => ({
+        amount: t.amount,
+        timestamp:t.timestamp,
+        toUserName:t.toUser.name ?? t.toUser.number
+    }));
 }
