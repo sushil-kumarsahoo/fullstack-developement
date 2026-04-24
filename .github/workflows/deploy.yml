@@ -22,8 +22,8 @@ jobs:
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: .docker//Dockerfile.user
+          context: 17-week/Paytm-web
+          file: 17-week/Paytm-web/docker/Dockerfile.user-app
           push: true
           tags: sushilkmrshoo/cicd:latest
 
